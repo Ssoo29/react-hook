@@ -1,15 +1,14 @@
-import React, { useContext } from "react";
-import Header from "./Header";
-import { useFns } from "./context";
+import React from "react";
+import { useSetLang, useT } from "./context";
 
 const Screen = () => {
-  const { userLogIn } = useFns();
+  const setLang = useSetLang();
+  const t = useT();
   return (
-    <div>
-      <Header></Header>
-      <h1>First Screen</h1>
-      <button onClick={userLogIn}>login</button>
-    </div>
+    <>
+      <h1>{t("Hello!")}</h1>
+      <button onClick={() => setLang("es")}>{t("Translate")}</button>
+    </>
   );
 };
 
