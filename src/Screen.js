@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import Header from "./Header";
-import { UserContext } from "./context";
+import { useFns } from "./context";
 
 const Screen = () => {
-  const { userLogIn } = useContext(UserContext);
+  const { userLogIn } = useFns();
   return (
     <div>
       <Header></Header>
