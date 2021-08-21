@@ -1,20 +1,19 @@
 import { v4 as uuidv4 } from "uuid";
+import { ADD, DEL, COMPLETED, UNCOMPLETED } from './actions';
 
 export const initialState = {
   toDos: [],
   completed: [],
 };
 
-export const ADD = "add";
-export const DEL = "del";
-export const COMPLETED = "completed";
-
 const reducer = (state, action) => {
+  console.log("state: ", state);
+  console.log("action: ", action);
   switch (action.type) {
     case ADD:
       return {
         ...state,
-        toDos: [...state.toDos, { text: action.payload, id: uuidv4() }],
+        toDos: [...state.toDos, { text: action.payload, id: uuidv4() }]
       };
     case DEL:
       return {
@@ -26,7 +25,14 @@ const reducer = (state, action) => {
       return {
         ...state,
         toDos: state.toDos.filter((toDo) => toDo.id !== action.payload),
-        completed: [...state.completed, { ...target }],
+        completed: [...state.completed, { ...target }]
+      };
+    case UNCOMPLETED:
+      const aTarget = state.completed.find((toDo) => toDo.id === action.payload);
+      return {
+        ...state,
+        completed: state.completed.filter((com) => com.id !== action.payload),
+        toDos: [...state.toDos, { ...aTarget }]
       };
     default:
       return;
